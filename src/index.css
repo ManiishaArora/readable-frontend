@@ -1,0 +1,117 @@
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.container{
+  padding-left: 200px !important;
+  padding-right: 40px !important;
+  width: 100% !important;
+}
+.bg-primary {
+  background-color: #20a8d8!important;
+}
+.bg-info {
+  background-color: #63c2de!important;
+}
+.navbar{
+  border-bottom: 1px solid #ccc !important;
+  background: #343a40!important;
+}
+.navbar .container{
+  text-align: center
+}
+.category{
+  background-color: #fff;
+  max-height:600px ;
+  border-radius: 3px;
+  overflow: auto;
+}
+.category .card-header{
+
+  text-transform:capitalize;
+}
+.category .card-body ul{
+  list-style: none;
+  padding-left: 0 !important;
+
+}
+
+.category .card-body li{
+  border: 1px solid #e6e4e4;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 160px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #343a40; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 50px;
+}
+
+/* The navigation menu links */
+.sidenav a,.sidenav a:visited,.sidenav h6 {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none !important;
+  font-weight: 500;
+  color: #a09d9d;
+  display: block;
+  text-transform:capitalize;
+}
+
+.sidenav h6 {
+  border-bottom: 1px solid #e6e4e4;
+  margin-left: 15px;
+  margin-right:15px;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #fff;
+  text-decoration: none;
+
+}
+
+.sidenav a:active {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+table td,table th{
+  text-transform: capitalize;
+  text-align: center;
+  vertical-align: top !important;
+}
+
+table{
+  border:2px solid #eceeef
+}
+
+.fa-thumbs-up{
+  color:green;
+}
+
+.fa-thumbs-down{
+  color:red;
+}
+
+table.no-border,table.no-border td{
+  border: 0 none !important;
+  width: 100%;
+}
+
+.fa-chevron-down,.fa-chevron-up{
+  font-size: 10px;
+  color: rgb(204, 204, 204);
+  cursor: pointer;
+}
