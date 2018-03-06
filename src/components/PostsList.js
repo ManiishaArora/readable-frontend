@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Table} from 'reactstrap'
 import moment from 'moment'
 import {connect} from 'react-redux'
-import {sortPosts,updatePostVote} from '../actions'
+import {sortPosts} from '../actions'
+import {updatePostVote} from '../middleware/posts'
 
 class Post extends Component {
     render() {

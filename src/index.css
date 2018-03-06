@@ -6,10 +6,14 @@ body {
   font-family: sans-serif;
 }
 
-.container{
+.root{
   padding-left: 200px !important;
   padding-right: 40px !important;
   width: 100% !important;
+}
+
+.clickable{
+  cursor: pointer;
 }
 .bg-primary {
   background-color: #20a8d8!important;
