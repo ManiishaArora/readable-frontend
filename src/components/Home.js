@@ -4,13 +4,11 @@ import PostsList from './PostsList'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchAllCategories} from '../middleware/category'
-import {fetchAllPosts} from '../middleware/posts'
 
 class Home extends Component {
   
   componentDidMount(){
     this.props.loadAllCategories();
-    this.props.loadAllPosts();
   }
   render() {
     return (
@@ -24,7 +22,7 @@ class Home extends Component {
           }
       </div>
       <Container className="mt-5 root">
-          <Link to="/create" >
+          <Link to="/posts/add" >
             <Button color="info" className="float-right mb-3 clickable" >Add Posts</Button>
           </Link>
           <PostsList />
@@ -42,8 +40,7 @@ function mapStateToProps({home,postList}){
 }
 function mapDispatchToProps(dispatch){
   return{
-    loadAllCategories: () => fetchAllCategories(dispatch),
-    loadAllPosts: () => fetchAllPosts(dispatch)
+    loadAllCategories: () => fetchAllCategories(dispatch)
   }
   
 }

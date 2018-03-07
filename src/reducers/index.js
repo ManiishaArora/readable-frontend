@@ -1,6 +1,6 @@
 import {
     GET_ALL_CATEGORIES,
-    GET_ALL_POSTS,
+    LOAD_ALL_POSTS,
     SORT_POSTS,
     VOTE_POSTS
 } from '../actions'
@@ -29,7 +29,7 @@ const home = (state=initialCategoryState,action) => {
 const postList= (state=initialPostListState,action) => {
     const {type,posts,order,key} = action;
     switch(type){
-    case GET_ALL_POSTS:
+    case LOAD_ALL_POSTS:
         return {
             ...state,
             posts

@@ -1,3 +1,3 @@
 export const apiToken = {
-    headers: { 'Authorization': '12345' }
+    headers: { 'Authorization': 'whatever-you-want' }
 }

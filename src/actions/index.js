@@ -1,5 +1,5 @@
 export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES';
-export const GET_ALL_POSTS = 'GET_ALL_POSTS';
+export const LOAD_ALL_POSTS = 'LOAD_ALL_POSTS';
 export const SORT_POSTS = 'SORT_POSTS'
 export const VOTE_POSTS = 'VOTE_POSTS'
 
@@ -9,7 +9,7 @@ export const setAllCategories = (categories) => ({
 });
 
 export const setAllPosts = (posts) => ({
-    type:GET_ALL_POSTS,
+    type:LOAD_ALL_POSTS,
     posts
 });
 

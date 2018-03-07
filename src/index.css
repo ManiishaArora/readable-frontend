@@ -6,6 +6,18 @@ body {
   font-family: sans-serif;
 }
 
+select {text-transform:capitalize !important}
+
+a:hover {
+  text-decoration: none !important;
+
+}
+
+.sidenav a:active {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
 .root{
   padding-left: 200px !important;
   padding-right: 40px !important;
