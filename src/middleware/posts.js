@@ -15,8 +15,14 @@ export const updatePostVote = async (dispatch,id,option) => {
 }
 
 
-export const fetchAllPosts = async dispatch => {
-    const response = await axios("http://localhost:3001/posts",apiToken)
+export const fetchAllPosts = async (dispatch,category=null) => {
+    let url = 'http://localhost:3001'
+    if(category===null||category==='undefined'){
+        url=url.concat('/posts')
+    }else{
+        url=url.concat(`/${category}/posts`)
+    }
+    const response = await axios(url,apiToken)
     const data = response.data;
     return dispatch(setAllPosts(data))
 }

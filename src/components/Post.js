@@ -6,6 +6,7 @@ import {fetchAllPosts} from '../middleware/posts'
 import uuid from 'uuid/v1'
 import axios from 'axios'
 import { Redirect } from 'react-router'
+import {Link} from 'react-router-dom'
 
 class Post extends Component {
     state = {
@@ -108,7 +109,11 @@ class Post extends Component {
                 </FormGroup>
          
                 <Button>Submit</Button>
+                <Link to="/" >
+                    <Button color="secondary" className="ml-3 clickable" >Cancel</Button>
+                </Link>
             </Form>
+           
             {saveCompleted && (
                 <Redirect to ="/" />
             )}

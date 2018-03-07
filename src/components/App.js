@@ -18,9 +18,10 @@ class App extends Component {
         </nav>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path={'/category/:category'} component={Home} />
           <Route path="/posts/add" component={Post} />
           <Route path="/posts/edit/:id" component={Post} />
-          <Route render={() => <h4 class="text-center m-5">Sorry...Page not found</h4>} />
+          <Route render={() => <h4 className="text-center m-5">Sorry...Page not found</h4>} />
         </Switch>
       </div>
     );

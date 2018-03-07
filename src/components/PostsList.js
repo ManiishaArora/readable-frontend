@@ -8,8 +8,12 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 class Post extends Component {
-    componentDidMount(){
-        this.props.loadAllPosts();
+    async componentDidMount(){ //This is to support fresh load of page - with or without category on path (which is available to this component as prop)
+        await this.props.loadAllPosts(this.props.selectedCategory);
+    }
+    async componentWillReceiveProps(newProps) { //This is to support navigation from the link on Home Page
+        if(newProps.selectedCategory !== this.props.selectedCategory)
+            await this.props.loadAllPosts(newProps.selectedCategory);
       }
     deletePost = async id => {
         const options = {
@@ -118,7 +122,7 @@ function mapStateToProps({home,postList}){
   }
   function mapDispatchToProps(dispatch){
     return{
-      loadAllPosts: () => fetchAllPosts(dispatch),
+      loadAllPosts: (category) => fetchAllPosts(dispatch,category),
       sortAllPosts:(posts,order,key) => dispatch(sortPosts(posts,order,key)),
       votePost:(id,option) => updatePostVote(dispatch,id,option)
     }
