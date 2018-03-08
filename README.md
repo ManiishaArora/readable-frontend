@@ -22,6 +22,8 @@ Set up as following:
 ## Important
 The server supports a small, fixed number of categories that users can put posts into. The server does not have methods for creating/modifying/deleting these categories. If you wish to add to the categories for your app, simply add your desired object to the Array in categories.js in the provided server.
 
+Any modifications to added/edited posts/comments are not persisted beyond a restart of backend server.
+
 ## Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). 
