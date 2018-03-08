@@ -12,7 +12,7 @@ Instructions for development:
 ## Backend Server
 
 The backend server that this app will communicate with can be taken from
-[`Server-Starter-Kit`] https://github.com/udacity/reactnd-project-readable-starter
+[`Server-Starter-Kit`](https://github.com/udacity/reactnd-project-readable-starter)
 
 Set up as following:
 1. Download or fork and clone the starter server repository
