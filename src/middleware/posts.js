@@ -1,4 +1,3 @@
-import {apiToken} from '../util/helper.js'
 import axios from 'axios'
 import {setAllPosts,votePosts,setPostByID,deletePost,editPosts,addPosts} from '../actions/index'
 import uuid from 'uuid/v1'
@@ -48,7 +47,7 @@ export const updatePostVote = async (dispatch,id,option) => {
 export const fetchPostByID = async (dispatch,id) => {
     let posts = []
     try{
-        const response = await axios(`/posts/${id}`,apiToken)
+        const response = await axios(`/posts/${id}`)
         const data = response.data;
         posts=[data]
     }catch(e){
