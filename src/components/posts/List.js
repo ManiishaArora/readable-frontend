@@ -2,32 +2,37 @@ import React, { Component } from 'react';
 import {Table} from 'reactstrap'
 import moment from 'moment'
 import {connect} from 'react-redux'
-import {sortPosts} from '../actions'
-import {updatePostVote,fetchAllPosts} from '../middleware/posts'
+import {sortPosts} from '../../actions'
+import {updatePostVote,fetchAllPosts,deletePostById} from '../../middleware/posts'
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 
-class Post extends Component {
+class List extends Component {
+    state={
+        loadingComplete:false
+    }
     async componentDidMount(){ //This is to support fresh load of page - with or without category on path (which is available to this component as prop)
         await this.props.loadAllPosts(this.props.selectedCategory);
+        this.setState({loadingComplete:true})
     }
     async componentWillReceiveProps(newProps) { //This is to support navigation from the link on Home Page
         if(newProps.selectedCategory !== this.props.selectedCategory)
             await this.props.loadAllPosts(newProps.selectedCategory);
       }
-    deletePost = async id => {
-        const options = {
-            method: 'DELETE',
-            headers: { 'Authorization': 'whatever-you-want','Content-type':'application/json','Accept':'application/json' },
-            data: JSON.stringify({id})
-        }
-        const url = `http://localhost:3001/posts/${id}`
-        const response = await axios( url,options) 
-        if(response.status===200 || response.status ==='200') 
-            this.props.loadAllPosts();
-    }
     render() {
+        const {sortAllPosts,posts,selectedCategory,votePost,deletePost} = this.props
         return (
+            <div>
+            { this.state.loadingComplete && posts && posts.length===0 &&
+            <div>
+                {typeof selectedCategory!=='undefined' &&
+                <h6>No Posts yet for - <span className="text-capitalize">{selectedCategory}</span>
+                </h6>
+                }
+            </div>
+            }
+            
+            { this.state.loadingComplete && posts && posts.length!==0 &&
+            
             <Table>
                 <thead>
                     <tr>
@@ -43,8 +48,8 @@ class Post extends Component {
                                 </tr>
                                 <tr>
                                     <td className="p-0 m-0"> 
-                                        <i className="fa fa-chevron-down ml-2 clickable" onClick={()=>{this.props.sortAllPosts(this.props.posts,'DESC','voteScore')}}/>
-                                        <i className="fa fa-chevron-up ml-2 clickable" onClick={()=>{this.props.sortAllPosts(this.props.posts,'ASC','voteScore')}} />
+                                        <i className="fa fa-chevron-down ml-2 clickable" onClick={()=>{sortAllPosts(posts,'DESC','voteScore')}}/>
+                                        <i className="fa fa-chevron-up ml-2 clickable" onClick={()=>{sortAllPosts(posts,'ASC','voteScore')}} />
                                     </td>
                                 </tr>
                             </tbody>
@@ -60,8 +65,8 @@ class Post extends Component {
                                 </tr>
                                 <tr>
                                     <td className="p-0 m-0"> 
-                                        <i className="fa fa-chevron-down ml-2 clickable" onClick={()=>{this.props.sortAllPosts(this.props.posts,'DESC','timestamp')}}/>
-                                        <i className="fa fa-chevron-up ml-2 clickable" onClick={()=>{this.props.sortAllPosts(this.props.posts,'ASC','timestamp')}} />
+                                        <i className="fa fa-chevron-down ml-2 clickable" onClick={()=>{sortAllPosts(posts,'DESC','timestamp')}}/>
+                                        <i className="fa fa-chevron-up ml-2 clickable" onClick={()=>{sortAllPosts(posts,'ASC','timestamp')}} />
                                     </td>
                                 </tr>
                             </tbody>
@@ -73,10 +78,12 @@ class Post extends Component {
                 </thead>
                 <tbody>
 
-                {this.props.posts && this.props.posts.length!==0 && this.props.posts.map(post =>
+                {posts.map(post =>
                     <tr key={post.id}>
                         <td>
-                            {post.title}
+                            <Link to={`/${post.category}/${post.id}`} className='text-dark'>
+                                {post.title}
+                            </Link>
                         </td> 
                         <td>
                             {post.author}
@@ -88,8 +95,8 @@ class Post extends Component {
                             {post.voteScore}
                         </td>
                         <td>
-                            <i className="fa fa-thumbs-up clickable" onClick={()=>{this.props.votePost(post.id,'upVote')}}/>
-                            <i className="fa fa-thumbs-down ml-2 clickable" onClick={()=>{this.props.votePost(post.id,'downVote')}}/>
+                            <i className="fa fa-thumbs-up clickable" onClick={()=>{votePost(post.id,'upVote')}}/>
+                            <i className="fa fa-thumbs-down ml-2 clickable" onClick={()=>{votePost(post.id,'downVote')}}/>
                         </td>
                         <td>
                            {moment(post.timestamp).format('lll')} 
@@ -101,7 +108,7 @@ class Post extends Component {
                             </Link>
                         </td>
                         <td>
-                            <i className="fa fa-remove clickable" onClick={()=>this.deletePost(post.id)}/>
+                            <i className="fa fa-remove clickable" onClick={()=>deletePost(post.id)}/>
                         </td>
 
                     </tr>
@@ -109,8 +116,9 @@ class Post extends Component {
                 )}
                 </tbody>
             </Table>
-            
            
+            }
+            </div>
         )
     }
 }
@@ -124,8 +132,9 @@ function mapStateToProps({home,postList}){
     return{
       loadAllPosts: (category) => fetchAllPosts(dispatch,category),
       sortAllPosts:(posts,order,key) => dispatch(sortPosts(posts,order,key)),
-      votePost:(id,option) => updatePostVote(dispatch,id,option)
+      votePost:(id,option) => updatePostVote(dispatch,id,option),
+      deletePost:(id)=>deletePostById(dispatch,id)
     }
     
   }
-export default connect(mapStateToProps,mapDispatchToProps)(Post) ;
+export default connect(mapStateToProps,mapDispatchToProps)(List) ;

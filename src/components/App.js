@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {Switch,Route,Link} from 'react-router-dom'
 import Home from './Home'
-import Post from './Post'
+import AddModifyPost from './posts/AddModify'
+import AddModifyComment from './comments/AddModify'
+import ViewPost from './posts/View'
+import NothingFound from './404'
 
 class App extends Component {
   
@@ -18,10 +21,14 @@ class App extends Component {
         </nav>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path={'/category/:category'} component={Home} />
-          <Route path="/posts/add" component={Post} />
-          <Route path="/posts/edit/:id" component={Post} />
-          <Route render={() => <h4 className="text-center m-5">Sorry...Page not found</h4>} />
+          <Route exact path={'/:category'} component={Home} />
+          <Route exact path="/:category/:id" component={ViewPost} />
+          <Route exact path="/action/add/post" component={AddModifyPost} />
+          <Route path="/posts/edit/:id" component={AddModifyPost} />
+          <Route exact path="/actions/add/comment/:postid" component={AddModifyComment} />
+          <Route exact path="/edit/comment/:commentid" component={AddModifyComment} />
+          <Route exact path="/site/page/404" component={NothingFound} />
+          <Route  render={NothingFound} />
         </Switch>
       </div>
     );

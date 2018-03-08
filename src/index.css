@@ -6,6 +6,10 @@ body {
   font-family: sans-serif;
 }
 
+.divider {
+  border-bottom:1px solid #ccc
+}
+
 select {text-transform:capitalize !important}
 
 a:hover {
@@ -32,6 +36,9 @@ a:hover {
 }
 .bg-info {
   background-color: #63c2de!important;
+}
+.text-dark{
+  color:#343a40!important
 }
 .navbar{
   border-bottom: 1px solid #ccc !important;
@@ -130,4 +137,12 @@ table.no-border,table.no-border td{
   font-size: 10px;
   color: rgb(204, 204, 204);
   cursor: pointer;
+}
+
+.modal-link:hover{
+  text-decoration: underline
+}
+
+.comment-block{
+  border: 1px solid #ccc
 }
