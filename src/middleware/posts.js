@@ -49,6 +49,8 @@ export const fetchPostByID = async (dispatch,id) => {
     try{
         const response = await axios(`/posts/${id}`)
         const data = response.data;
+        if(Object.keys(data).length === 0)
+            throw new Error("No Posts Exist")
         posts=[data]
     }catch(e){
         console.error(`Error while calling Post API for id :${id}`,e)
@@ -75,7 +77,7 @@ export const deletePostById = async (dispatch,id) => {
         method: 'DELETE',
         headers: { 'Content-type':'application/json','Accept':'application/json' }
     }
-    const response = await axios( `${id}`,options)
+    const response = await axios( `/posts/${id}`,options)
     const posts=[response.data]
     return dispatch(deletePost(posts))
 }

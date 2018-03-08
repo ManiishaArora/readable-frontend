@@ -45,6 +45,7 @@ const postList= (state=initialPostListState,action) => {
     switch(type){
     case LOAD_ALL_POSTS:
     case GET_POST_BY_ID:
+    console.log('post get reducer:',posts.slice())
         return {
             ...state,
             posts
@@ -69,6 +70,7 @@ const postList= (state=initialPostListState,action) => {
                         }
         return Object.assign({}, state, postsArray)
     case DELETE_POST:
+        
         postsArray = {'posts':state.posts.slice().filter(post=>post.id!==posts[0].id)}
         return Object.assign({}, state, postsArray)
     default:
